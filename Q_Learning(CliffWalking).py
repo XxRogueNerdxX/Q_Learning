@@ -5,7 +5,7 @@ env = gym.make('CliffWalking-v0')
 
 q_table = np.zeros((env.observation_space.n, env.action_space.n))
 
-def take_action(state):
+def choose_action(state):
     e = np.random.uniform(0,1)
     if e < epsilon:
         action = env.action_space.sample()
@@ -30,7 +30,7 @@ for episode in range(total_episodes):
     state = env.reset()
     done = False
     while not done:
-        action = take_action(state)
+        action = choose_action(state)
         next_state, reward, done, info = env.step(action)
         update(state, action, reward, next_state)
         score+= reward
